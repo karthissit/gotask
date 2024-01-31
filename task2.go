@@ -16,8 +16,10 @@ type NSPEvent struct {
 	OrganizingTeam OrganizingTeam
 }
 
-func CreateOrganizingTeam(teamMembers []string, primaryContact string) NSPEvent {
+func CreateOrganizingTeam(eventDate string, eventName string, teamMembers []string, primaryContact string) NSPEvent {
 	event := NSPEvent{
+		EventDate: eventDate,
+		EventName: eventName,
 		OrganizingTeam: OrganizingTeam{
 			TeamMembers:    teamMembers,
 			PrimaryContact: primaryContact,
@@ -27,6 +29,8 @@ func CreateOrganizingTeam(teamMembers []string, primaryContact string) NSPEvent 
 }
 
 func ReadOrganizingTeam(event NSPEvent) {
+	fmt.Println("Event Name:", event.EventName)
+	fmt.Println("Event Date:", event.EventDate)
 	fmt.Println("Organizing Team:")
 	fmt.Println("Team Members:", event.OrganizingTeam.TeamMembers)
 	fmt.Println("Primary Contact:", event.OrganizingTeam.PrimaryContact)
@@ -70,7 +74,7 @@ func DeleteOrganizingTeam(event NSPEvent) NSPEvent {
 
 func main() {
 
-	event := CreateOrganizingTeam([]string{"Member1", "Member2"}, "TeamLead")
+	event := CreateOrganizingTeam("1-Feb-2024", "Event1", []string{"Member1", "Member2"}, "TeamLead")
 	ReadOrganizingTeam(event)
 
 	event = UpdateOrganizingTeam(event, []string{"NewMember1", "NewMember2"}, "NewTeamLead")
